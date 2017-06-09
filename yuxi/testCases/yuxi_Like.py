@@ -3,8 +3,6 @@
 from appium import webdriver
 import unittest
 import time
-
-
 # import os
 # PATH = lambda p: os.path.abspath(os.path.join(os.path.dirname(__file__), p))
 
@@ -18,7 +16,6 @@ class test_Like(unittest.TestCase):
                 # 'platformVersion': '5.1.1',
                 # 'deviceName': '525b7d43',
                 'deviceName': 'bf25b6c5',
-                'noReset': 'true',
                 # 'deviceName': 'YGKBBCE680444462',
                 # 'app': PATH('/Users/tanxiaofen/Downloads/yx_2.5.6.apk'),
                 'appPackage': 'com.yuxip',
@@ -62,7 +59,6 @@ class test_Like(unittest.TestCase):
 
         # 对第一条记录点赞或取消点赞
         element = self.driver.find_element_by_id('com.yuxip:id/ultimate_list')
-        # element = self.listFindElements('com.yuxip:id/ultimate_list','com.yuxip:id/iv_topic_fave')
         elements = element.find_elements_by_id('com.yuxip:id/iv_topic_fave')
 
         # 第一条记录初始的赞数
@@ -113,27 +109,6 @@ class test_Like(unittest.TestCase):
         except Exception, e:
             print e
         time.sleep(3)
-
-    # 寻找元素
-    def findElement(self, element):
-        if element.startswitch('//'):
-            self.ele = self.driver.find_element_by_xpath(element)
-        elif 'id:/' in element or 'string:/' in element:
-            self.ele = self.driver.find_element_by_id(element)
-        else:
-            self.ele = self.driver.find_element_by_class_name(element)
-        return self.ele
-
-    # List定位
-    def listFindElements(self, parent, child):
-        el1 = self.findElement(parent)
-        if child.startswith('//'):
-            el2 = el1.find_element_by_xpath(child)
-        elif 'id:/' in child or 'string:/' in child:
-            el2 = el1.find_element_by_id(child)
-        else:
-            el2 = el1.find_element_by_class_name(child)
-        return el2
 
     def tearDown(self):
         self.driver.quit()
